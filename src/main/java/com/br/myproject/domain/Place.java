@@ -1,35 +1,51 @@
 package com.br.myproject.domain;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.time.Instant;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class Place {
+@Document
+public class Place implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private String id;
 
+	@Indexed(unique = true)
 	private String name;
+	@Indexed(unique = true)
 	private String slug;
 	private String city;
 	private String state;
-	private Date createdAt;
-	private Date updatedAt;
-	
+	private Instant createdAt;
+	private Instant updatedAt;
+
 	public Place() {
-		
+
 	}
 
-	public Place(String name, String city, String state, Date createdAt, Date updatedAt) {
+	public Place(String id, String name, String slug, String city, String state, Instant createdAt, Instant updatedAt) {
 		super();
+		this.id = id;
 		this.name = name;
+		this.slug = slug;
 		this.city = city;
 		this.state = state;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+	}
+	
+	public Place(String id, String name, String slug, String city, String state) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.slug = slug;
+		this.city = city;
+		this.state = state;
 	}
 
 	public String getName() {
@@ -64,19 +80,27 @@ public class Place {
 		this.state = state;
 	}
 
-	public Date getCreatedAt() {
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Instant getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(Instant createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public Date getUpdatedAt() {
+	public Instant getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(Date updatedAt) {
+	public void setUpdatedAt(Instant updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
@@ -84,6 +108,31 @@ public class Place {
 	public String toString() {
 		return "Place [id=" + id + ", name=" + name + ", slug=" + slug + ", city=" + city + ", state=" + state
 				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Place other = (Place) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 }
