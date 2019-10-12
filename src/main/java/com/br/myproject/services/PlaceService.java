@@ -12,12 +12,12 @@ public interface PlaceService {
 	public Place insertPlace();
 	
 	public Place findById(String id);
-	
-	public Place findBySlug(String slug);
-	
+
 	public Place findByName(String name);
 
 	public List<Place> findAllByCity(String city);
+	
+	public List<Place> findAllByNameContains(String name);
 
 	public Place fromDTO(PlaceDTO objDto);
 	

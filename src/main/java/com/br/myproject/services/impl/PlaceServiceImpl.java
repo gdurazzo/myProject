@@ -35,15 +35,6 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 
 	@Override
-	public Place findBySlug(String slug) {
-		Place obj = repository.findBySlug(slug);
-		if (obj == null) {
-			throw new ObjectNotFoundException("Object Not Found");
-		}
-		return obj;
-	}
-
-	@Override
 	public Place findByName(String name) {
 		Place obj = repository.findByNameIgnoreCase(name);
 		if (obj == null) {
@@ -83,17 +74,28 @@ public class PlaceServiceImpl implements PlaceService {
 
 	}
 
-
-	public Place fromDTO(PlaceDTO objDto) {
-		Slugify slg = new Slugify();
-		String result = slg.slugify(objDto.getName());
-		return new Place(null, objDto.getName(), result, objDto.getCity(), objDto.getState());
-
-	}
-
 	public void delete(String id) {
 		findById(id);
 		repository.deleteById(id);
+	}
+
+	@Override
+	public List<Place> findAllByNameContains(String name) {
+		String result = slugfy(name);
+		return repository.findAllBySlugContaining(result);
+
+	}
+
+	private String slugfy(String text) {
+		Slugify slg = new Slugify();
+		String result = slg.slugify(text);
+		return result;
+	}
+
+	public Place fromDTO(PlaceDTO objDto) {
+		String result = slugfy(objDto.getName());
+		return new Place(null, objDto.getName(), result, objDto.getCity(), objDto.getState());
+
 	}
 
 }

@@ -63,6 +63,14 @@ public class PlaceResource {
 		return ResponseEntity.ok().body(new PlaceDTO(place));
 	}
 	
+	@RequestMapping(value = "/filter/{slug}", method = RequestMethod.GET)
+	public ResponseEntity<List<Place>> findBySlugg(@PathVariable String slug) {
+
+		List<Place> places = placeService.findAllByNameContains(slug);
+		
+		return ResponseEntity.ok().body(places);
+	}
+	
 	
 	@RequestMapping( method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody PlaceDTO objDto) {

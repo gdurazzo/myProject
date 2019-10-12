@@ -16,5 +16,7 @@ public interface PlaceRepository extends MongoRepository<Place, String>{
 	Place findByNameIgnoreCase(String name);
 	
 	List<Place> findAllByCityIgnoreCase(String city);
+	
+	List<Place> findAllBySlugContaining(String slug);
 
 }

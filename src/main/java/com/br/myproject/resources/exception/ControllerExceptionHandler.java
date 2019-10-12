@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.br.myproject.services.exception.ObjectAlreadyExistException;
 import com.br.myproject.services.exception.ObjectNotFoundException;
-import com.ibm.icu.impl.duration.impl.Utils;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
