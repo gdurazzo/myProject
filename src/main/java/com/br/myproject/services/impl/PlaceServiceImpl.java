@@ -24,11 +24,6 @@ public class PlaceServiceImpl implements PlaceService {
 		return repository.findAll();
 	}
 
-	public Place insertPlace() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public Place findById(String id) {
 		Optional<Place> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Object Not Found"));

@@ -8,8 +8,6 @@ import com.br.myproject.dto.PlaceDTO;
 public interface PlaceService {
 
 	public List<Place> findAll();
-
-	public Place insertPlace();
 	
 	public Place findById(String id);
 

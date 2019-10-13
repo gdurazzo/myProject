@@ -35,12 +35,6 @@ public class PlaceResource {
 		return ResponseEntity.ok().body(places);
 	}
 	
-//	@GetMapping(value = "/{slug}")
-//	public ResponseEntity<Place> findBySlug(@PathVariable String slug){
-//		Place place = placeService.findBySlug(slug);
-//		return ResponseEntity.ok().body(place)
-//	}
-	
 	@GetMapping(value = "/placename")
 	public ResponseEntity<Place> findByName(@RequestParam(value="name", defaultValue = "") String name){
 		name = URL.decodeParam(name);
@@ -64,7 +58,7 @@ public class PlaceResource {
 	}
 	
 	@RequestMapping(value = "/filter/{slug}", method = RequestMethod.GET)
-	public ResponseEntity<List<Place>> findBySlugg(@PathVariable String slug) {
+	public ResponseEntity<List<Place>> findBySlug(@PathVariable String slug) {
 
 		List<Place> places = placeService.findAllByNameContains(slug);
 		
