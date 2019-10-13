@@ -1,5 +1,9 @@
 # Crud api Project
 
+# Description
+
+Inside the solution folder, there is a SpringBoot project using MongoDb, it has the basic functionality of list, register, update and delete Places in the database.
+The Project has already created two places registered in the database.
 
 # Testing environment
 - https://springbootherokumongo.herokuapp.com
